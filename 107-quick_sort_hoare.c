@@ -51,7 +51,7 @@ int hoare_partition(int *a, int low, int high, size_t size)
 			print_array(a, size);
 		}
 	}
-	return left;
+	return (left);
 }
 
 
