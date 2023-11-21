@@ -5,11 +5,13 @@
 /**
  *swap_nodes - Swaps nodes.
  *@list: Head node
- *@head: Node to move forward.
- *@next: Node to move backward.
+ *@current: Node to move forward.
+ *@nxt: Node to move backward.
  */
-void swap_nodes(listint_t *list, listint_t *head, listint_t *next)
+void swap_nodes(listint_t **list, listint_t **current, listint_t **nxt)
 {
+	listint_t *head = *current, *next = *nxt;
+
 	head->next = next->next;
 	if (next->next)
 		next->next->prev = head;
@@ -17,7 +19,7 @@ void swap_nodes(listint_t *list, listint_t *head, listint_t *next)
 	if (head->prev)
 		head->prev->next = next;
 	else
-		list = next;
+		*list = next;
 	next->next = head;
 	head->prev = next;
 }
@@ -33,6 +35,9 @@ void cocktail_sort_list(listint_t **list)
 	listint_t *head = *list, *prev, *next, *temp;
 	bool sorted = false;
 
+	if (!head || head->next == NULL)
+		return;
+
 	while (!sorted)
 	{
 		sorted = true;
@@ -42,7 +47,7 @@ void cocktail_sort_list(listint_t **list)
 			if (head->n > next->n)
 			{
 				sorted = false;
-				swap_nodes(*list, head, next);
+				swap_nodes(list, &head, &next);
 				print_list(*list);
 			}
 			temp = head;
@@ -57,7 +62,7 @@ void cocktail_sort_list(listint_t **list)
 			if (prev->n > head->n)
 			{
 				sorted = false;
-				swap_nodes(*list, prev, head);
+				swap_nodes(list, &prev, &head);
 				print_list(*list);
 			}
 			head = head->prev;
