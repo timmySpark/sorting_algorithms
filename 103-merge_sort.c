@@ -51,11 +51,13 @@ void merge(int *array, int low, int mid, int high)
  */
 void merge_sort(int *array, size_t size)
 {
+	if (size < 2 || array == NULL)
+		return;
 	merge_helper(array, 0, size);
 }
 
 /**
- *merger_helper - Helper function for merge_sort.
+ *merge_helper - Helper function for merge_sort.
  *@array: Array to sort.
  *@low: Index of first element.
  *@high: Index of last element.
