@@ -12,6 +12,9 @@ void counting_sort(int *array, size_t size)
 {
 	int *count, *output, i, k = array[0];
 
+	if (size < 2 || array == NULL)
+		return;
+
 	for (i = 0; i < (int)size; i++)
 	{
 		if (array[i] > k)
